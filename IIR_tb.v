@@ -4,7 +4,6 @@
 module IIR_tb( y
     );
 
-//your code here=============
 
 reg clk,rst;
 reg[7:0] a,b,c,d;
@@ -27,36 +26,26 @@ a=0.5*16;//0.5
 b=256-1.5*16;//-1.5
 c=2*16;//2.0
 d=256-1*16;//-1
-x=0;
+x=8'b0000_0000;
 
 #4 rst=1;
 
-#30 rst=0;
-
+#100 $finish;
 end
 
 always #1 begin
     clk<=~clk;
 end
 
-integer n = -5;
-integer m = -5;
-always@(posedge clk)begin
-    if(rst)begin
-        if(n<6)begin
-            x <=256 + n*16;
-			n <= n + 1;
-			m <=-6;
-        end
-    end
-	else begin 
-		if(m<6)begin
-            x <=256 + m*16;
-			m <= m + 1;
-        end
-	end
+always@(posedge clk or negedge rst) begin
+    if (!rst) x <= 0;
+    else 
+    x <= x+(1<<4);
 end
 
-//your code here=============
+initial begin
+    $recordfile("waveform_IIR.trn");
+    $recordvars();
+end
 
 endmodule
