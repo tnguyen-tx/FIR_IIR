@@ -14,3 +14,14 @@ At 5th clock edge output of FIR = -5.5
 ![image](https://user-images.githubusercontent.com/57820377/144718757-79a05ff2-4317-4715-906a-42fe07a8c0ba.png)
 
 - Output values are retained using flip flops.
+
+Waveform:
++ a = 0.5 ('b0000.1000)
++ b = -1.5 ('b1110.0111)
++ c = 2 ('b0010.0000)
++ d = -1 ('b1111.0000)
+- At 3rd clock cycle: x=1 ('b0001.0000) => y = a*x + b*0 + c*0 + d*0 = 0.5*1 = 0.5 ('b0000.1000)
+- At 4th clock cycle: x=2 ('b0010.0000) => y = a*x + b*x1 + c*y1 + d*0 = 0.5*2 + (-1.5)*1 + 2*0.5= 0.5 ('b0000.1000)
+- At 5th clock cycle: x=3 ('b0011.0000) => y = a*x + b*x1 + c*y1 + d*y2 = 0.5*3 + (-1.5)*2 + 2*0.5 + (-1*0.5)= -1 ('b1111.0000)
+
+![image](https://user-images.githubusercontent.com/57820377/144723275-8b7edb8c-e6c2-474e-b817-8f53139e04d2.png)
